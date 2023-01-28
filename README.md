@@ -20,6 +20,8 @@ Created with :heart: by Admin RPL
     - [Enums](#enums)
     - [Tuples](#tuples)
     - [Any Type](#any-type)
+    - [Type Assertion/Type Casting](#type-assertion-type-casting)
+    - [Unknown Type](#unknown-type)
     - [Union Type](#union-type)
     - [Object Type](#object-type)
     - [Optional Property](#optional-property)
@@ -28,12 +30,12 @@ Created with :heart: by Admin RPL
       - [Apakah Interface == Type Aliases ?](#apakah-interface--type-aliases-)
     - [Declaration Merge](#declaration-merge)
     - [Aliases](#aliases)
-    - [Type Assertion/Type Casting](#type-assertion-type-casting)
     - [Generics Type](#generics-type)
   - [Konsep Dasar di Typescript](#konsep-dasar-di-typescript)
     - [Functions](#functions)
       - [Parameter Optional dan Default](#parameter-optional-dan-default)
       - [Parameter Rest](#parameter-rest)
+      - [Never](#never)
     - [Statement Control Flow](#statement-control-flow)
       - [`if`](#if)
       - [`switch case`](#switch-case)
@@ -69,6 +71,11 @@ Keuntungan dalam menggunakan Typescript akan membuat kode kita lebih mudah dibac
 Pada dasarnya, sebaiknya diperlukan pemahaman general mengenai Javascript sebelum menggunakan Typescript. Konsep untuk penggunaan NodeJS maupun NPM (Node Package Manager) juga diperlukan meskipun dapat dipelajari seiring waktu.
 
 ![image](https://res.cloudinary.com/practicaldev/image/fetch/s--i0CSAaCp--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.pinimg.com/564x/a5/f5/3f/a5f53fc0b1f7d182ea201123d4c3d750.jpg)
+
+Keuntungan lainnya:
+- Adanya intellisense yang membuat proses pengembangan menjadi lebih efisien
+- Kompatibilitas pada browser dengan versi lama javascript
+
 
 ### Proses Instalasi Typescript
 
@@ -281,6 +288,53 @@ Secara umum, menggunakan tipe any dapat mengurangi kemampuan Typescript untuk me
 ![image](https://devs.lol/uploads/2021/12/meme-dev-humor-when-you-are-a-typescript-developer-263.jpg)
 
 Sesekali pakai any boleh jika memang udah buntu, tapi jangan sampai tuman o (_￣ ▽ ￣_)ブ
+
+### Type Assertion/Type Casting
+
+Type Assertion memungkinkan Kita untuk mengatur tipe dari sebuah variable/value dan memberi tahu compiler untuk tidak menyimpulkannya. Ini adalah saat kita, sebagai seorang programmer, mungkin memiliki pemahaman yang lebih baik tentang tipe variabel yang ada daripada apa yang dapat disimpulkan oleh TypeScript sendiri.
+
+```typescript
+let myVar: any = "a string";
+
+// cara 1
+
+let castedVar = <string>myVar;
+
+// cara 2
+
+let castedVar2 = myVar as string;
+```
+
+Pada code diatas, anggapannya `myVar` adalah suatu variable yang dianggap oleh Typescript sebagai any, namun dengan type assertion kita dapa memberitahu Typescript bahwa variabel tersebut pada saat itu merupakan sebuah string. Sehingga kita dapat mendapatkan segala operasi untuk tipe data string pada variabel tersebut, lebih baik dari pada dianggap any.
+
+Type assertion ini akan lebih terlihat penggunaanya saat digunakan untuk mengenali DOM yang disimpan pada sebuah variabel.
+
+### Unknown Type
+Unknown adalah tipe data di TypeScript yang digunakan untuk mewakili tipe data yang tidak diketahui. Ini berbeda dari tipe data "any" yang mewakili semua tipe data dan tidak membatasi operasi yang dapat dilakukan pada nilai tersebut. Tipe data "unknown" lebih restriktif daripada "any" dan memerlukan tipe yang sesuai untuk diubah sebelum digunakan. Unknown Type dapat menjadi alternative yang lebih baik dari pada harus menggunakan Any Type.
+```typescript
+let value: unknown; 
+value = "hello"; // OK 
+value = 123; // OK  
+```
+terlihat sama dengan "any" tetapi unknown memiliki restriction lebih ketat.
+```typescript
+let anyV: any = 31; 
+anyV.toUpperCase() // tidak ada error, padahal hal tersebut tidak bisa dilakukan
+
+let unkV: unknown = 12;
+unkV.toUpperCase() //Error, karena unkV belum diketahui tipe data valuenya
+```
+dari contoh diatas kita bisa lihat bagaimana unknown menghindarkan kita dari penggunaan operasi yang tidak sesuai pada suatu tipe data. Akan tetapi meskipun operasi didukung oleh tipe data yang sesuai "unk" type tetap akan memberikan error karena state dari value tersebut tetap merupakan unknown (tidak diketahui).
+```ts
+let str: unknown = "string"
+str.toUpperCase() //Error
+```
+Lalu bagaimana menghadapi case ini, kita harus memberitahu ts bahwa tipe data dari `str` adalah string dengan menggunakan type assertion yang telah kita pelajari sebelumnya.
+```ts
+let str: unknown = "string"
+(str as string).toUpperCase() //Valid
+```
+
 
 ### Union Type
 
@@ -504,25 +558,6 @@ const inMix : InMix //Error ^
 
 ```
 
-### Type Assertion/Type Casting
-
-Type Assertion memungkinkan Kita untuk mengatur tipe dari sebuah variable/value dan memberi tahu compiler untuk tidak menyimpulkannya. Ini adalah saat kita, sebagai seorang programmer, mungkin memiliki pemahaman yang lebih baik tentang tipe variabel yang ada daripada apa yang dapat disimpulkan oleh TypeScript sendiri.
-
-```typescript
-let myVar: any = "a string";
-
-// cara 1
-
-let castedVar = <string>myVar;
-
-// cara 2
-
-let castedVar2 = myVar as string;
-```
-
-Pada code diatas, anggapannya `myVar` adalah suatu variable yang dianggap oleh Typescript sebagai any, namun dengan type assertion kita dapa memberitahu Typescript bahwa variabel tersebut pada saat itu merupakan sebuah string. Sehingga kita dapat mendapatkan segala operasi untuk tipe data string pada variabel tersebut, lebih baik dari pada dianggap any.
-
-Type assertion ini akan lebih terlihat penggunaanya saat digunakan untuk mengenali DOM yang disimpan pada sebuah variabel.
 
 ### Generics Type
 
@@ -740,6 +775,21 @@ function getTotal(...numbers: number[]): number {
 console.log(getTotal()); // output 0
 console.log(getTotal(10, 20)); // output 30
 console.log(getTotal(10, 20, 30)); // output 60
+```
+
+#### Never
+Never adalah tipe data di TypeScript yang menunjukkan bahwa suatu fungsi atau ekspresi selalu akan menghasilkan exception atau tidak pernah mengembalikan nilai. Ini sering digunakan ketika kita membuat fungsi yang selalu menimbulkan exception atau ketika kita menggunakan metode atau fungsi yang selalu menghasilkan exception. Biasanya hanya digunakan pada suatu fungsi
+Sebagai contoh, fungsi berikut selalu akan menimbulkan exception dan dapat ditentukan tipe datanya sebagai "never":
+```ts
+function error(message: string): never {
+  throw new Error(message);
+}
+// atau
+function infiniteLoop(): never {
+  while (true) {
+    ...
+  }
+}
 ```
 
 ### Statement Control Flow
