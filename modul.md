@@ -2,6 +2,56 @@
 
 Created with :heart: by Admin RPL
 
+## Daftar Isi
+
+- [Modul Typescript](#modul-typescript)
+  - [Daftar Isi](#daftar-isi)
+  - [Pengenalan Typescript](#pengenalan-typescript)
+    - [Penjelasan Typescript](#penjelasan-typescript)
+    - [Proses Instalasi Typescript](#proses-instalasi-typescript)
+      - [Persiapan](#persiapan)
+      - [Installation](#installation)
+  - [Tipe Data](#tipe-data)
+    - [Type Anotations](#type-anotations)
+    - [Type Inferences](#type-inferences)
+    - [Tipe Data Primitif](#tipe-data-primitif)
+      - [Undefined vs Null](#undefined-vs-null)
+    - [Array](#array)
+    - [Enums](#enums)
+    - [Tuples](#tuples)
+    - [Any Type](#any-type)
+    - [Union Type](#union-type)
+    - [Object Type](#object-type)
+    - [Optional Property](#optional-property)
+    - [Type Aliases](#type-aliases)
+    - [Interface](#interface)
+      - [Apakah Interface == Type Aliases ?](#apakah-interface----type-aliases--)
+    - [Declaration Merge](#declaration-merge)
+    - [Aliases](#aliases)
+    - [Type Assertion/Type Casting](#type-assertion-type-casting)
+    - [Generics Type](#generics-type)
+  - [Konsep Dasar di Typescript](#konsep-dasar-di-typescript)
+    - [Functions](#functions)
+      - [Parameter Optional dan Default](#parameter-optional-dan-default)
+      - [Parameter Rest](#parameter-rest)
+    - [Statement Control Flow](#statement-control-flow)
+      - [`if`](#-if-)
+      - [`switch case`](#-switch-case-)
+      - [Perulangan `for`](#perulangan--for-)
+      - [Perulangan `while`](#perulangan--while-)
+      - [`break` dan `continue`](#-break--dan--continue-)
+  - [Konsep Class di Typescript](#konsep-class-di-typescript)
+    - [Class](#class)
+    - [Access Modifiers](#access-modifiers)
+      - [Private](#private)
+      - [Public](#public)
+      - [Protected](#protected)
+      - [Readonly Properties](#readonly-properties)
+    - [Inheritance](#inheritance)
+      - [Constructor](#constructor)
+      - [Method Overriding](#method-overriding)
+    - [Static](#static)
+
 ## Pengenalan Typescript
 
 ---
@@ -454,7 +504,7 @@ const inMix : InMix //Error ^
 
 ```
 
-### Type Assertion / Type Casting
+### Type Assertion/Type Casting
 
 Type Assertion memungkinkan Kita untuk mengatur tipe dari sebuah variable/value dan memberi tahu compiler untuk tidak menyimpulkannya. Ini adalah saat kita, sebagai seorang programmer, mungkin memiliki pemahaman yang lebih baik tentang tipe variabel yang ada daripada apa yang dapat disimpulkan oleh TypeScript sendiri.
 
