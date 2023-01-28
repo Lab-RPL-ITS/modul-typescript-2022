@@ -1,4 +1,4 @@
-# Modul Typescript
+# Modul Typescript Bahasa Indonesia
 
 Created with :heart: by Admin RPL
 
