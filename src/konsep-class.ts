@@ -212,13 +212,13 @@
 
 // - Static
 
-class TypescriptMath {
-  static readonly PI = 3.14;
-}
+// class TypescriptMath {
+//   static readonly PI = 3.14;
+// }
 
-console.log(TypescriptMath.PI);
-TypescriptMath.PI = 4
-console.log(TypescriptMath.PI);
+// console.log(TypescriptMath.PI);
+// TypescriptMath.PI = 4
+// console.log(TypescriptMath.PI);
 
 // class Employee {
 //   // static property
