@@ -73,9 +73,9 @@ Pada dasarnya, sebaiknya diperlukan pemahaman general mengenai Javascript sebelu
 ![image](https://res.cloudinary.com/practicaldev/image/fetch/s--i0CSAaCp--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.pinimg.com/564x/a5/f5/3f/a5f53fc0b1f7d182ea201123d4c3d750.jpg)
 
 Keuntungan lainnya:
+
 - Adanya intellisense yang membuat proses pengembangan menjadi lebih efisien
 - Kompatibilitas pada browser dengan versi lama javascript
-
 
 ### Proses Instalasi Typescript
 
@@ -114,7 +114,7 @@ npm install -g typescript
 4.  Compile file Typescript yang telah dibuat dengan command
 
 ```bash
-tsc namafile.ts filetujuan.js
+tsc namafile.ts --out filetujuan.js
 ```
 
 Atau jika nama file Typescript dan Javascript yang diinginkan sama, cukup jalankan compiler dengan command.
@@ -310,31 +310,37 @@ Pada code diatas, anggapannya `myVar` adalah suatu variable yang dianggap oleh T
 Type assertion ini akan lebih terlihat penggunaanya saat digunakan untuk mengenali DOM yang disimpan pada sebuah variabel.
 
 ### Unknown Type
+
 Unknown adalah tipe data di TypeScript yang digunakan untuk mewakili tipe data yang tidak diketahui. Ini berbeda dari tipe data "any" yang mewakili semua tipe data dan tidak membatasi operasi yang dapat dilakukan pada nilai tersebut. Tipe data "unknown" lebih restriktif daripada "any" dan memerlukan tipe yang sesuai untuk diubah sebelum digunakan. Unknown Type dapat menjadi alternative yang lebih baik dari pada harus menggunakan Any Type.
+
 ```typescript
-let value: unknown; 
-value = "hello"; // OK 
-value = 123; // OK  
+let value: unknown;
+value = "hello"; // OK
+value = 123; // OK
 ```
+
 terlihat sama dengan "any" tetapi unknown memiliki restriction lebih ketat.
+
 ```typescript
-let anyV: any = 31; 
-anyV.toUpperCase() // tidak ada error, padahal hal tersebut tidak bisa dilakukan
+let anyV: any = 31;
+anyV.toUpperCase(); // tidak ada error, padahal hal tersebut tidak bisa dilakukan
 
 let unkV: unknown = 12;
-unkV.toUpperCase() //Error, karena unkV belum diketahui tipe data valuenya
-```
-dari contoh diatas kita bisa lihat bagaimana unknown menghindarkan kita dari penggunaan operasi yang tidak sesuai pada suatu tipe data. Akan tetapi meskipun operasi didukung oleh tipe data yang sesuai "unk" type tetap akan memberikan error karena state dari value tersebut tetap merupakan unknown (tidak diketahui).
-```ts
-let str: unknown = "string"
-str.toUpperCase() //Error
-```
-Lalu bagaimana menghadapi case ini, kita harus memberitahu ts bahwa tipe data dari `str` adalah string dengan menggunakan type assertion yang telah kita pelajari sebelumnya.
-```ts
-let str: unknown = "string"
-(str as string).toUpperCase() //Valid
+unkV.toUpperCase(); //Error, karena unkV belum diketahui tipe data valuenya
 ```
 
+dari contoh diatas kita bisa lihat bagaimana unknown menghindarkan kita dari penggunaan operasi yang tidak sesuai pada suatu tipe data. Akan tetapi meskipun operasi didukung oleh tipe data yang sesuai "unk" type tetap akan memberikan error karena state dari value tersebut tetap merupakan unknown (tidak diketahui).
+
+```ts
+let str: unknown = "string";
+str.toUpperCase(); //Error
+```
+
+Lalu bagaimana menghadapi case ini, kita harus memberitahu ts bahwa tipe data dari `str` adalah string dengan menggunakan type assertion yang telah kita pelajari sebelumnya.
+
+```ts
+let str: unknown = "string"(str as string).toUpperCase(); //Valid
+```
 
 ### Union Type
 
@@ -558,7 +564,6 @@ const inMix : InMix //Error ^
 
 ```
 
-
 ### Generics Type
 
 Generics merupakan fitur yang dibawa Typescript yang membuat kita dapat menggunakan blok code yang reusable yang memiliki tipe data yang bervariasi. Secara umum generics type di buat pada fungsi yang memiliki parameter yang memiliki tipe data yang bervariasi sehingga tipe data yang di deklarasikan pada fungsi juga harus dibuat bervariasi. Akan tetapi kita dapat "menyimpan" tipe datanya kedalam sebuah variabel sehingga tipe datanya akan bergantung dengan tipe data yang didefinisikan saat fungsi ingi digunakan.
@@ -778,8 +783,10 @@ console.log(getTotal(10, 20, 30)); // output 60
 ```
 
 #### Never
+
 Never adalah tipe data di TypeScript yang menunjukkan bahwa suatu fungsi atau ekspresi selalu akan menghasilkan exception atau tidak pernah mengembalikan nilai. Ini sering digunakan ketika kita membuat fungsi yang selalu menimbulkan exception atau ketika kita menggunakan metode atau fungsi yang selalu menghasilkan exception. Biasanya hanya digunakan pada suatu fungsi
 Sebagai contoh, fungsi berikut selalu akan menimbulkan exception dan dapat ditentukan tipe datanya sebagai "never":
+
 ```ts
 function error(message: string): never {
   throw new Error(message);
@@ -803,15 +810,13 @@ Hampir mirip dengan bahasa pemrograman lainnya, terdapat pula statement `if else
 Sintaks untuk statement `if` adalah berikut.
 
 ```typescript
-
 if (condition) {
-    // if statements
-} if else (condition2) {
-    // if-else statements
+  // if statements
+} else if (condition2) {
+  // if-else statements
 } else {
-    // else statements berjalan apabila semua kondisi tidak memenuhi;
+  // else statements berjalan apabila semua kondisi tidak memenuhi;
 }
-
 ```
 
 #### `switch case`
